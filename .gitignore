@@ -17,9 +17,6 @@ crash.*.log
 *.override.tf
 *.override.tf.json
 
-# Claude Code settings
-.claude/
-
 # Documentation folder
 documentation/
 
