@@ -1,0 +1,5 @@
+subscription_id         = "your-azure-subscription-id"
+location                = "West Europe"
+project_name            = "openwebui"
+custom_domain           = "your-domain.xyz"
+configure_custom_domain = false
