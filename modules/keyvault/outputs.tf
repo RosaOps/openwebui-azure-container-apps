@@ -5,3 +5,7 @@ output "key_vault_name" {
 output "secret_versionless_id" {
   value = azurerm_key_vault_secret.webui_secret_key.versionless_id
 }
+
+output "database_url_secret_versionless_id" {
+  value = azurerm_key_vault_secret.database_url.versionless_id
+}

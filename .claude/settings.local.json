@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(terraform --version)",
+      "Bash(az --version)",
+      "Bash(git --version)",
+      "Bash(winget install:*)",
+      "Bash(grep -n \"azurerm_container_app_environment_managed_certificate\\\\|ingress\\\\[0\\\\]\\\\.fqdn\\\\|depends_on\" /c/Users/adyyo/Desktop/Bosh/*.tf)",
+      "Bash(find \"c:/Users/adyyo/Desktop/Bosh/documentation/\" -name \"*.md\" -exec sed -i 's/boshmademebuyadomain\\\\.xyz/boschaiops.xyz/g' {} \\\\;)",
+      "Bash(terraform output:*)",
+      "Bash(terraform show:*)",
+      "Bash(python3 -c ':*)",
+      "Bash(terraform state:*)",
+      "Bash(nslookup boschaiops.xyz 8.8.8.8)",
+      "Bash(nslookup -type=TXT asuid.boschaiops.xyz 8.8.8.8)",
+      "Bash(terraform import:*)",
+      "Bash(MSYS_NO_PATHCONV=1 terraform import 'module.container_app.azapi_resource.managed_certificate[0]' '/subscriptions/ae22d726-1f45-4e06-8506-bfe47852937d/resourceGroups/rg-openwebui-ltd0v6/providers/Microsoft.App/managedEnvironments/cae-openwebui-ltd0v6/managedCertificates/cert-openwebui')",
+      "Bash(MSYS_NO_PATHCONV=1 az resource show --ids '/subscriptions/ae22d726-1f45-4e06-8506-bfe47852937d/resourceGroups/rg-openwebui-ltd0v6/providers/Microsoft.App/managedEnvironments/cae-openwebui-ltd0v6/managedCertificates/cert-openwebui' --query 'properties')",
+      "Bash(MSYS_NO_PATHCONV=1 az resource delete --ids '/subscriptions/ae22d726-1f45-4e06-8506-bfe47852937d/resourceGroups/rg-openwebui-ltd0v6/providers/Microsoft.App/managedEnvironments/cae-openwebui-ltd0v6/managedCertificates/cert-openwebui')",
+      "Bash(az containerapp:*)",
+      "Bash(az storage:*)",
+      "Bash(terraform apply:*)"
+    ]
+  }
+}

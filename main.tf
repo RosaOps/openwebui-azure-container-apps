@@ -26,6 +26,16 @@ module "identity" {
   tags                = var.tags
 }
 
+module "postgresql" {
+  source = "./modules/postgresql"
+
+  resource_group_name = azurerm_resource_group.main.name
+  location            = azurerm_resource_group.main.location
+  project_name        = var.project_name
+  suffix              = var.suffix
+  tags                = var.tags
+}
+
 module "keyvault" {
   source = "./modules/keyvault"
 
@@ -37,6 +47,7 @@ module "keyvault" {
   tenant_id                     = data.azurerm_client_config.current.tenant_id
   admin_object_id               = data.azurerm_client_config.current.object_id
   managed_identity_principal_id = module.identity.principal_id
+  database_url                  = module.postgresql.database_url
 }
 
 # Azure DNS Zone — manages DNS records automatically so destroy+apply works without manual Namecheap updates.
@@ -84,6 +95,7 @@ module "container_app" {
   data_share_name         = module.storage.data_share_name
   managed_identity_id     = module.identity.id
   secret_versionless_id   = module.keyvault.secret_versionless_id
+  database_url_secret_id  = module.keyvault.database_url_secret_versionless_id
   custom_domain           = var.custom_domain
   configure_custom_domain = var.configure_custom_domain
 

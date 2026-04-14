@@ -54,6 +54,11 @@ variable "secret_versionless_id" {
   type        = string
 }
 
+variable "database_url_secret_id" {
+  description = "Versionless Key Vault secret URI for DATABASE_URL"
+  type        = string
+}
+
 variable "custom_domain" {
   description = "Custom domain for the Container App (e.g., myapp.xyz)"
   type        = string

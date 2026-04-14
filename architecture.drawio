@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxGraphModel dx="1422" dy="762" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" math="0" shadow="1">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Background: Azure Resource Group -->
+    <mxCell id="bg" value="Azure Resource Group: rg-openwebui-boshaiops23" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;verticalAlign=top;opacity=30;" vertex="1" parent="1">
+      <mxGeometry x="200" y="120" width="1100" height="680" as="geometry" />
+    </mxCell>
+
+    <!-- Namecheap (outside Azure) -->
+    <mxCell id="namecheap" value="🌐 Namecheap&#xa;Custom DNS → Azure nameservers&#xa;(configured once, never touched again)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=11;fontStyle=2;" vertex="1" parent="1">
+      <mxGeometry x="30" y="60" width="240" height="70" as="geometry" />
+    </mxCell>
+
+    <!-- User (outside Azure) -->
+    <mxCell id="user" value="👤 User&#xa;browser" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="60" y="380" width="120" height="70" as="geometry" />
+    </mxCell>
+
+    <!-- Azure DNS Zone -->
+    <mxCell id="dns" value="🌐 Azure DNS Zone&#xa;boschaiops.xyz&#xa;&#xa;A record @ → env IP&#xa;TXT asuid → verification ID" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#0078D4;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="240" y="150" width="200" height="100" as="geometry" />
+    </mxCell>
+
+    <!-- Container App Environment -->
+    <mxCell id="cae" value="📦 Container App Environment&#xa;cae-openwebui-boshaiops23" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#0078D4;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="480" y="580" width="260" height="70" as="geometry" />
+    </mxCell>
+
+    <!-- Container App -->
+    <mxCell id="ca" value="🚀 Container App&#xa;ca-openwebui-boshaiops23&#xa;&#xa;Image: open-webui:main&#xa;Port: 8080 | CPU: 1 core | RAM: 2Gi&#xa;Scale: 1–10 replicas @ 75% CPU&#xa;DATA_DIR=/tmp (SQLite local)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="460" y="320" width="280" height="150" as="geometry" />
+    </mxCell>
+
+    <!-- Managed Identity -->
+    <mxCell id="mi" value="🔑 Managed Identity&#xa;id-openwebui-boshaiops23&#xa;&#xa;Role: Key Vault Secrets User" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="820" y="150" width="220" height="90" as="geometry" />
+    </mxCell>
+
+    <!-- Key Vault -->
+    <mxCell id="kv" value="🔐 Key Vault&#xa;kv-openwebui-boshaiops23&#xa;&#xa;Secret: WEBUI-SECRET-KEY&#xa;RBAC authorization&#xa;Auto-generated 32-char value" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="1090" y="140" width="200" height="110" as="geometry" />
+    </mxCell>
+
+    <!-- Storage Account -->
+    <mxCell id="st" value="💾 Storage Account&#xa;stopenwebuiboshaiops23&#xa;Standard LRS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="880" y="360" width="210" height="80" as="geometry" />
+    </mxCell>
+
+    <!-- File Share Models -->
+    <mxCell id="fs1" value="📁 File Share: models&#xa;/app/chat_frontend/models&#xa;50 GB | AI models" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+      <mxGeometry x="840" y="530" width="180" height="75" as="geometry" />
+    </mxCell>
+
+    <!-- File Share Data -->
+    <mxCell id="fs2" value="📁 File Share: data&#xa;/app/backend/data&#xa;50 GB | App files" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+      <mxGeometry x="1050" y="530" width="180" height="75" as="geometry" />
+    </mxCell>
+
+    <!-- SSL Certificate -->
+    <mxCell id="cert" value="🔒 SSL Certificate&#xa;Azure Managed&#xa;HTTP validation&#xa;Auto-renewed" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
+      <mxGeometry x="260" y="400" width="150" height="80" as="geometry" />
+    </mxCell>
+
+    <!-- ARROWS -->
+
+    <!-- Namecheap -> DNS Zone -->
+    <mxCell id="e1" value="delegates NS" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;fontColor=#666666;fontSize=10;dashed=1;endArrow=open;" edge="1" source="namecheap" target="dns" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- User -> DNS Zone -->
+    <mxCell id="e2" value="1. DNS lookup" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#0078D4;fontColor=#0078D4;fontSize=10;" edge="1" source="user" target="dns" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- User -> Container App (HTTPS) -->
+    <mxCell id="e3" value="2. HTTPS request" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#0078D4;fontColor=#0078D4;fontSize=10;fontStyle=1;" edge="1" source="user" target="ca" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- DNS -> Container App -->
+    <mxCell id="e4" value="resolves to env IP" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#0078D4;fontColor=#0078D4;fontSize=10;" edge="1" source="dns" target="ca" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- SSL -> Container App -->
+    <mxCell id="e5" value="terminates TLS" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#82b366;fontColor=#82b366;fontSize=10;" edge="1" source="cert" target="ca" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Container App -> CAE -->
+    <mxCell id="e6" value="runs in" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#0078D4;fontColor=#0078D4;fontSize=10;" edge="1" source="ca" target="cae" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Container App -> Managed Identity -->
+    <mxCell id="e7" value="uses identity" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#9673a6;fontColor=#9673a6;fontSize=10;" edge="1" source="ca" target="mi" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Managed Identity -> Key Vault -->
+    <mxCell id="e8" value="reads WEBUI_SECRET_KEY" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#9673a6;fontColor=#9673a6;fontSize=10;" edge="1" source="mi" target="kv" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Container App -> Storage Account -->
+    <mxCell id="e9" value="mounts volumes" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#d6b656;fontColor=#d6b656;fontSize=10;" edge="1" source="ca" target="st" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Storage -> File Shares -->
+    <mxCell id="e10" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#d6b656;" edge="1" source="st" target="fs1" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="e11" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#d6b656;" edge="1" source="st" target="fs2" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>

@@ -31,3 +31,9 @@ variable "managed_identity_principal_id" {
   description = "Principal ID of the Container App managed identity"
   type        = string
 }
+
+variable "database_url" {
+  description = "PostgreSQL connection string stored as a Key Vault secret"
+  type        = string
+  sensitive   = true
+}

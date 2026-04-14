@@ -40,10 +40,16 @@ resource "azurerm_container_app" "main" {
     identity_ids = [var.managed_identity_id]
   }
 
-  # Secret referenced from Key Vault via Managed Identity — no value stored in code
+  # Secrets referenced from Key Vault via Managed Identity — no values stored in code
   secret {
     name                = "webui-secret-key"
     key_vault_secret_id = var.secret_versionless_id
+    identity            = var.managed_identity_id
+  }
+
+  secret {
+    name                = "database-url"
+    key_vault_secret_id = var.database_url_secret_id
     identity            = var.managed_identity_id
   }
 
@@ -80,16 +86,20 @@ resource "azurerm_container_app" "main" {
       cpu    = 1.0
       memory = "2Gi"
 
-      # Secret injected as environment variable — value comes from Key Vault at runtime
+      # Secrets injected as environment variables — values come from Key Vault at runtime
       env {
         name        = "WEBUI_SECRET_KEY"
         secret_name = "webui-secret-key"
       }
 
-      # SQLite is incompatible with Azure File Share (SMB lacks POSIX file locking).
-      # DATA_DIR overrides the default data path so the database runs on local container
-      # storage. Both File Shares remain mounted for persistent model and data files.
-      # Production recommendation: replace SQLite with Azure Database for PostgreSQL.
+      env {
+        name        = "DATABASE_URL"
+        secret_name = "database-url"
+      }
+
+      # ChromaDB (vector storage) uses SQLite internally, which is incompatible with
+      # Azure File Share (SMB lacks POSIX file locking). DATA_DIR keeps runtime files
+      # on local container storage. User data and chat history persist in PostgreSQL.
       env {
         name  = "DATA_DIR"
         value = "/tmp"

@@ -37,6 +37,14 @@ resource "azurerm_key_vault_secret" "webui_secret_key" {
   depends_on = [azurerm_role_assignment.kv_admin]
 }
 
+resource "azurerm_key_vault_secret" "database_url" {
+  name         = "DATABASE-URL"
+  value        = var.database_url
+  key_vault_id = azurerm_key_vault.main.id
+
+  depends_on = [azurerm_role_assignment.kv_admin]
+}
+
 # Key Vault enters soft-delete for 7 days after destroy — name stays reserved globally.
 # This purges it immediately so the same name can be reused on the next apply.
 resource "terraform_data" "purge_key_vault" {

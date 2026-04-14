@@ -4,7 +4,6 @@ Terraform configuration to deploy [OpenWebUI](https://openwebui.com) on Azure Co
 
 Custom Domain  --> https://boschaiops.xyz/  
 
-
 ## Architecture
 
 ![Architecture](Diagram.png)
@@ -15,7 +14,8 @@ Custom Domain  --> https://boschaiops.xyz/
 - **Storage Account** with two File Shares (`/app/backend/data` and `/app/chat_frontend/models`)
 - **Container App Environment** + **Container App** running OpenWebUI
 - **User-Assigned Managed Identity** for passwordless Key Vault access
-- **Key Vault** with auto-generated secret (`WEBUI_SECRET_KEY`) — no hardcoded values anywhere
+- **Key Vault** with auto-generated secrets (`WEBUI_SECRET_KEY`, `DATABASE_URL`) — no hardcoded values anywhere
+- **Azure Database for PostgreSQL Flexible Server** for persistent data storage
 - **Azure DNS Zone** managing A and TXT records automatically
 - **Custom domain** with Azure-managed SSL certificate (HTTP validation)
 - **CPU-based autoscaling** (min 1 / max 10 replicas, scale at 75% utilization)
@@ -60,4 +60,5 @@ From this point on, DNS is fully managed by Terraform. No manual DNS changes are
 - `terraform.tfvars` is gitignored — use `terraform.tfvars.example` as a template
 - `suffix` must be unique (used in globally unique resource names like Key Vault and Storage Account)
 - `azapi` provider is used for the managed certificate — `azurerm_container_app_environment_managed_certificate` is not available in azurerm 3.x
-- SQLite runs on local container storage (`DATA_DIR=/tmp`) due to SMB locking limitations on Azure File Share — data does not persist across container restarts. For production, use Azure Database for PostgreSQL
+- User data and chat history persist in PostgreSQL across container restarts and redeployments
+- `DATA_DIR=/tmp` keeps ChromaDB (vector storage) on local container storage due to SMB locking limitations on Azure File Share — this does not affect chat or user data persistence
