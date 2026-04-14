@@ -4,8 +4,8 @@ Terraform configuration to deploy [OpenWebUI](https://openwebui.com) on Azure Co
 
 Custom Domain  --> https://boschaiops.xyz/  
 Test Credentials:  
-Mail:        testuser@mail.com  
-Password:    TestPassword123!  
+**Mail:---------->**testuser@mail.com  
+**Password:------>**TestPassword123!  
 
 ## Architecture
 
