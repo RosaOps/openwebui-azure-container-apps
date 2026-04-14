@@ -1,4 +1,4 @@
-# Terraform state — contains deployed resource IDs and generated secrets
+# Terraform state
 *.tfstate
 *.tfstate.*
 *.tfstate.backup
@@ -20,5 +20,5 @@ crash.*.log
 # Documentation folder
 documentation/
 
-# Assessment PDF (optional — remove this line if you want to include it)
+
 *.pdf
