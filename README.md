@@ -3,9 +3,7 @@
 Terraform configuration to deploy [OpenWebUI](https://openwebui.com) on Azure Container Apps with HTTPS, Key Vault secrets, and automatic DNS management.
 
 Custom Domain  --> https://boschaiops.xyz/  
-Test Credentials:  
-Mail:---------->testuser@mail.com  
-Password:---->TestPassword123!  
+
 
 ## Architecture
 
